@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.5">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group-CopyTemplate_S01" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="PDF_01_CopyTemplate_S01_getTemplates " enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getTemplates" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">us1.pdfgeneratorapi.com</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v3/templates</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="PDF_02_CopyTemplate_S01_postCopyTemplate " enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="postCopyTemplate" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="name" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">my copied template</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                  <stringProp name="Argument.name">name</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">us1.pdfgeneratorapi.com</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v3/templates/662230/copy</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">template_id</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.response.id</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="PDF_03_CopyTemplate_S01_getSingleTemplate " enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getSingleTemplate" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">us1.pdfgeneratorapi.com</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v3/templates/${template_id}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Authorization</stringProp>
+                  <stringProp name="Header.value">Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJlMDZhODIwOTg3OGUxODhjNDExZGQ4NjlhNzEwY2M3ZDYxYjliY2I3YmExNTBjZGMxMTYxNzE2ZDg4ZWIxNzE4Iiwic3ViIjoibWZpZXJyb3MxMDNAZ21haWwuY29tIiwiZXhwIjoxNjg1NTY3NzkwfQ.Vf9l7STlSlZqqLBqPHttlwZz5Vxt-au8vCuvNXFB-Xw</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">Bearer ${jwt}</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="jwt" elementType="Argument">
+              <stringProp name="Argument.name">jwt</stringProp>
+              <stringProp name="Argument.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJlMDZhODIwOTg3OGUxODhjNDExZGQ4NjlhNzEwY2M3ZDYxYjliY2I3YmExNTBjZGMxMTYxNzE2ZDg4ZWIxNzE4Iiwic3ViIjoibWZpZXJyb3MxMDNAZ21haWwuY29tIiwiZXhwIjoxNjg1NTY3NzkwfQ.Vf9l7STlSlZqqLBqPHttlwZz5Vxt-au8vCuvNXFB-Xw</stringProp>
+              <stringProp name="Argument.desc">Token</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group-UpdateTemplate_S02" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="PDF_01_UpdateTemplate_S02_getSingleTemplate" enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getSingleTemplate" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">us1.pdfgeneratorapi.com</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v3/templates/662228</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Authorization</stringProp>
+                  <stringProp name="Header.value">Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJlMDZhODIwOTg3OGUxODhjNDExZGQ4NjlhNzEwY2M3ZDYxYjliY2I3YmExNTBjZGMxMTYxNzE2ZDg4ZWIxNzE4Iiwic3ViIjoibWZpZXJyb3MxMDNAZ21haWwuY29tIiwiZXhwIjoxNjg1NTY3NzkwfQ.Vf9l7STlSlZqqLBqPHttlwZz5Vxt-au8vCuvNXFB-Xw</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="PDF_02_UpdateTemplate_S02_putUpdateTemplate " enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="putUpdateTemplate" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+    &quot;name&quot;: &quot;Modified_Template&quot;,&#xd;
+    &quot;tags&quot;: [&#xd;
+        &quot;invoice&quot;,&#xd;
+        &quot;perf&quot;&#xd;
+    ],&#xd;
+    &quot;isDraft&quot;: true,&#xd;
+    &quot;layout&quot;: {&#xd;
+        &quot;format&quot;: &quot;A4&quot;,&#xd;
+        &quot;width&quot;: 21,&#xd;
+        &quot;height&quot;: 29.7,&#xd;
+        &quot;unit&quot;: &quot;cm&quot;,&#xd;
+        &quot;orientation&quot;: &quot;portrait&quot;,&#xd;
+        &quot;rotaion&quot;: 0,&#xd;
+        &quot;margins&quot;: {&#xd;
+            &quot;top&quot;: 0.5,&#xd;
+            &quot;right&quot;: 0.5,&#xd;
+            &quot;bottom&quot;: 0.5,&#xd;
+            &quot;left&quot;: 0.5&#xd;
+        },&#xd;
+        &quot;repeatLayout&quot;: {&#xd;
+            &quot;format&quot;: &quot;A4&quot;,&#xd;
+            &quot;width&quot;: 21,&#xd;
+            &quot;height&quot;: 29.7&#xd;
+        },&#xd;
+        &quot;emptyLabels&quot;: 0&#xd;
+    },&#xd;
+    &quot;pages&quot;: [&#xd;
+        {&#xd;
+            &quot;width&quot;: 21,&#xd;
+            &quot;height&quot;: 29.7,&#xd;
+            &quot;margins&quot;: {&#xd;
+                &quot;right&quot;: 0.5,&#xd;
+                &quot;bottom&quot;: 0.5&#xd;
+            },&#xd;
+            &quot;components&quot;: [&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                }&#xd;
+            ]&#xd;
+        },&#xd;
+        {&#xd;
+            &quot;width&quot;: 21,&#xd;
+            &quot;height&quot;: 29.7,&#xd;
+            &quot;margins&quot;: {&#xd;
+                &quot;right&quot;: 0.5,&#xd;
+                &quot;bottom&quot;: 0.5&#xd;
+            },&#xd;
+            &quot;components&quot;: [&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                }&#xd;
+            ]&#xd;
+        }&#xd;
+    ]&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">us1.pdfgeneratorapi.com</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v3/templates/662228</stringProp>
+            <stringProp name="HTTPSampler.method">PUT</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">updated_name</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.response.name</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="PDF_03_UpdateTemplate_S02_getSingleTemplate " enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getSingleTemplate" enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">us1.pdfgeneratorapi.com</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v3/templates/662228</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion-name update" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="-461721296">Modified_Template</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">8</intProp>
+              <stringProp name="Assertion.scope">children</stringProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">Bearer ${jwt}</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="jwt" elementType="Argument">
+              <stringProp name="Argument.name">jwt</stringProp>
+              <stringProp name="Argument.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJlMDZhODIwOTg3OGUxODhjNDExZGQ4NjlhNzEwY2M3ZDYxYjliY2I3YmExNTBjZGMxMTYxNzE2ZDg4ZWIxNzE4Iiwic3ViIjoibWZpZXJyb3MxMDNAZ21haWwuY29tIiwiZXhwIjoxNjg1NTY3NzkwfQ.Vf9l7STlSlZqqLBqPHttlwZz5Vxt-au8vCuvNXFB-Xw</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">token</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group-CreateTemplate_S03" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="PDF_01_CreateTemplate_S03_postCreateTemplate " enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="postCreateTemplate" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+    &quot;name&quot;: &quot;Invoice template 00001&quot;,&#xd;
+    &quot;tags&quot;: [&#xd;
+        &quot;invoice&quot;,&#xd;
+        &quot;orders&quot;&#xd;
+    ],&#xd;
+    &quot;isDraft&quot;: true,&#xd;
+    &quot;layout&quot;: {&#xd;
+        &quot;format&quot;: &quot;A4&quot;,&#xd;
+        &quot;width&quot;: 21,&#xd;
+        &quot;height&quot;: 29.7,&#xd;
+        &quot;unit&quot;: &quot;cm&quot;,&#xd;
+        &quot;orientation&quot;: &quot;portrait&quot;,&#xd;
+        &quot;rotaion&quot;: 0,&#xd;
+        &quot;margins&quot;: {&#xd;
+            &quot;top&quot;: 0.5,&#xd;
+            &quot;right&quot;: 0.5,&#xd;
+            &quot;bottom&quot;: 0.5,&#xd;
+            &quot;left&quot;: 0.5&#xd;
+        },&#xd;
+        &quot;repeatLayout&quot;: {&#xd;
+            &quot;format&quot;: &quot;A4&quot;,&#xd;
+            &quot;width&quot;: 21,&#xd;
+            &quot;height&quot;: 29.7&#xd;
+        },&#xd;
+        &quot;emptyLabels&quot;: 0&#xd;
+    },&#xd;
+    &quot;pages&quot;: [&#xd;
+        {&#xd;
+            &quot;width&quot;: 21,&#xd;
+            &quot;height&quot;: 29.7,&#xd;
+            &quot;margins&quot;: {&#xd;
+                &quot;right&quot;: 0.5,&#xd;
+                &quot;bottom&quot;: 0.5&#xd;
+            },&#xd;
+            &quot;components&quot;: [&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                }&#xd;
+            ]&#xd;
+        },&#xd;
+        {&#xd;
+            &quot;width&quot;: 21,&#xd;
+            &quot;height&quot;: 29.7,&#xd;
+            &quot;margins&quot;: {&#xd;
+                &quot;right&quot;: 0.5,&#xd;
+                &quot;bottom&quot;: 0.5&#xd;
+            },&#xd;
+            &quot;components&quot;: [&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                }&#xd;
+            ]&#xd;
+        }&#xd;
+    ]&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">us1.pdfgeneratorapi.com</stringProp>
+            <stringProp name="HTTPSampler.port">443</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v3/templates/</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">template_id</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.response.id</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="PDF_02_CreateTemplate_S03_getSingleTemplate " enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getSingleTemplate " enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">us1.pdfgeneratorapi.com</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v3/templates/${template_id}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">Bearer ${jwt}</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="jwt" elementType="Argument">
+              <stringProp name="Argument.name">jwt</stringProp>
+              <stringProp name="Argument.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJlMDZhODIwOTg3OGUxODhjNDExZGQ4NjlhNzEwY2M3ZDYxYjliY2I3YmExNTBjZGMxMTYxNzE2ZDg4ZWIxNzE4Iiwic3ViIjoibWZpZXJyb3MxMDNAZ21haWwuY29tIiwiZXhwIjoxNjg1NTY3NzkwfQ.Vf9l7STlSlZqqLBqPHttlwZz5Vxt-au8vCuvNXFB-Xw</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+              <stringProp name="Argument.desc">token</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group-DeleteTemplate_S04" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="PDF_01_DeleteTemplate_S04_getSingleTemplate " enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getSingleTemplate " enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">us1.pdfgeneratorapi.com</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v3/templates/662356</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">template_id</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.response.id</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="PDF_02_DeleteTemplate_S04_deleteTemplate " enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="deleteTemplate " enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+    &quot;name&quot;: &quot;Invoice template 00001&quot;,&#xd;
+    &quot;tags&quot;: [&#xd;
+        &quot;invoice&quot;,&#xd;
+        &quot;orders&quot;&#xd;
+    ],&#xd;
+    &quot;isDraft&quot;: true,&#xd;
+    &quot;layout&quot;: {&#xd;
+        &quot;format&quot;: &quot;A4&quot;,&#xd;
+        &quot;width&quot;: 21,&#xd;
+        &quot;height&quot;: 29.7,&#xd;
+        &quot;unit&quot;: &quot;cm&quot;,&#xd;
+        &quot;orientation&quot;: &quot;portrait&quot;,&#xd;
+        &quot;rotaion&quot;: 0,&#xd;
+        &quot;margins&quot;: {&#xd;
+            &quot;top&quot;: 0.5,&#xd;
+            &quot;right&quot;: 0.5,&#xd;
+            &quot;bottom&quot;: 0.5,&#xd;
+            &quot;left&quot;: 0.5&#xd;
+        },&#xd;
+        &quot;repeatLayout&quot;: {&#xd;
+            &quot;format&quot;: &quot;A4&quot;,&#xd;
+            &quot;width&quot;: 21,&#xd;
+            &quot;height&quot;: 29.7&#xd;
+        },&#xd;
+        &quot;emptyLabels&quot;: 0&#xd;
+    },&#xd;
+    &quot;pages&quot;: [&#xd;
+        {&#xd;
+            &quot;width&quot;: 21,&#xd;
+            &quot;height&quot;: 29.7,&#xd;
+            &quot;margins&quot;: {&#xd;
+                &quot;right&quot;: 0.5,&#xd;
+                &quot;bottom&quot;: 0.5&#xd;
+            },&#xd;
+            &quot;components&quot;: [&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                }&#xd;
+            ]&#xd;
+        },&#xd;
+        {&#xd;
+            &quot;width&quot;: 21,&#xd;
+            &quot;height&quot;: 29.7,&#xd;
+            &quot;margins&quot;: {&#xd;
+                &quot;right&quot;: 0.5,&#xd;
+                &quot;bottom&quot;: 0.5&#xd;
+            },&#xd;
+            &quot;components&quot;: [&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                },&#xd;
+                {&#xd;
+                    &quot;cls&quot;: &quot;labelComponent&quot;,&#xd;
+                    &quot;id&quot;: &quot;component-12313&quot;,&#xd;
+                    &quot;width&quot;: 3.5,&#xd;
+                    &quot;height&quot;: 1,&#xd;
+                    &quot;top&quot;: 4.2,&#xd;
+                    &quot;left&quot;: 2.5,&#xd;
+                    &quot;zindex&quot;: 102,&#xd;
+                    &quot;value&quot;: &quot;${price}&quot;,&#xd;
+                    &quot;dataIndex&quot;: &quot;line_items&quot;&#xd;
+                }&#xd;
+            ]&#xd;
+        }&#xd;
+    ]&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">us1.pdfgeneratorapi.com</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v3/templates/${template_id}</stringProp>
+            <stringProp name="HTTPSampler.method">DELETE</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+        </hashTree>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="PDF_03_DeleteTemplate_S04_getSingleTemplate " enabled="true">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+          <boolProp name="TransactionController.parent">true</boolProp>
+        </TransactionController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getSingleTemplate " enabled="true">
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+              <collectionProp name="Arguments.arguments"/>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">us1.pdfgeneratorapi.com</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">/api/v3/templates/${template_id}</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+              <collectionProp name="Asserion.test_strings">
+                <stringProp name="51512">404</stringProp>
+              </collectionProp>
+              <stringProp name="Assertion.custom_message"></stringProp>
+              <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+              <boolProp name="Assertion.assume_success">false</boolProp>
+              <intProp name="Assertion.test_type">16</intProp>
+              <stringProp name="Assertion.scope">children</stringProp>
+            </ResponseAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Authorization</stringProp>
+            <stringProp name="Header.value">Bearer ${jwt}</stringProp>
+          </elementProp>
+        </collectionProp>
+      </HeaderManager>
+      <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="jwt" elementType="Argument">
+            <stringProp name="Argument.name">jwt</stringProp>
+            <stringProp name="Argument.value">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJlMDZhODIwOTg3OGUxODhjNDExZGQ4NjlhNzEwY2M3ZDYxYjliY2I3YmExNTBjZGMxMTYxNzE2ZDg4ZWIxNzE4Iiwic3ViIjoibWZpZXJyb3MxMDNAZ21haWwuY29tIiwiZXhwIjoxNjg1NTY3NzkwfQ.Vf9l7STlSlZqqLBqPHttlwZz5Vxt-au8vCuvNXFB-Xw</stringProp>
+            <stringProp name="Argument.desc">Token</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
